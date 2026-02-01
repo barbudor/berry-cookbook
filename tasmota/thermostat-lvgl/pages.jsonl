@@ -1,0 +1,75 @@
+{"page":0,"id":0,"bg_color":"#000000","text_color":"#eeeeee","dimming_time":1,"dimming_min":35,"dimming_duration":15}
+  {"id":1,"obj":"fixed","x":0,"y":0,"w%":100,"h":30,"bg_color":"#3465a4","bg_opa":255}
+    {"id":11,"parentid":1,"obj":"label",       "x":0,  "y":0,"w":360,"h":30,"pad_left":8,"text":"---","text_color":"#eeeeee","text_font":"montserrat-28"}
+    {"id":12,"parentid":1,"obj":"lv_clock",    "x":360,"y":6,"w":84,"h":24,"text_font":"seg7-20","text_color":"#dddddd"}
+    {"id":13,"parentid":1,"obj":"lv_wifi_bars","x":444,"y":3,"w":33,"h":24,"bg_color":"#606060","line_color":"#dddddd"}
+  {"id":2,"obj":"fixed","x":0,"y":420,"w":480,"h":60,"bg_color":"#3465a4","bg_opa":255}
+    {"id":21,"parentid":2,"obj":"img","x":79,"y":2,"text":"","bg_color":"#2A5382","bg_opa":0,"radius":12}
+    {"id":22,"parentid":2,"obj":"btn","x":79,"w":58,"y":2,"h":56,"text":"","bg_opa":0,"border_color":"#eeeeee","radius":12}
+    {"id":31,"parentid":2,"obj":"img","x":211,"y":2,"text":"","bg_color":"#2A5382","bg_opa":0,"radius":12}
+    {"id":32,"parentid":2,"obj":"btn","x":211,"w":58,"y":2,"h":56,"text":"","bg_opa":0,"border_color":"#eeeeee","radius":12}
+    {"id":41,"parentid":2,"obj":"img","x":343,"y":2,"text":"","bg_color":"#2A5382","bg_opa":0,"radius":12}
+    {"id":42,"parentid":2,"obj":"btn","x":343,"w":58,"y":2,"h":56,"text":"","bg_opa":0,"border_color":"#eeeeee","radius":12}
+    {"id":51,"parentid":2,"obj":"led","x":460,"y":25,"w":10,"h":10,"color":"#3465a4","val":200}
+    
+{"page":1,"id":0,"bg_color":"#000000","text_color":"#eeeeee"}
+  {"id":1,"obj":"flex","x":0,"y":30,"w%":100,"h":390,"flex_main_place":3,"flex_track_place":2,"flex_cross_place":2,"flex_flow":1}
+    {"id":2,"parentid":1,"obj":"flex","w%":100,"h":160,"flex_main_place":3}
+      {"id":20,"parentid":2,"obj":"flex","w":140,"h":160,"flex_main_place":3,"flex_track_place":2,"flex_cross_place":2,"flex_flow":1}
+        {"id":21,"parentid":20,"obj":"btn","bg_color":"#3465a4","bg_opa":255,"text":"CONF+","text_color":"#FF5000","text_font":"montserrat-28","w%":100,"radius":10,"border_width":2,"border_side":15,"border_color":"#dddddd","flex_grow":1}
+        {"id":22,"parentid":20,"obj":"btn","bg_color":"#3465a4","bg_opa":255,"text":"CONF","text_color":"#FF9040","text_font":"montserrat-28","w%":100,"radius":10,"border_width":2,"border_side":15,"border_color":"#dddddd","flex_grow":1}
+        {"id":23,"parentid":20,"obj":"btn","bg_color":"#3465a4","bg_opa":255,"text":"ECO","text_color":"#eeeeee","text_font":"montserrat-28","w%":100,"radius":10,"border_width":2,"border_side":15,"border_color":"#dddddd","flex_grow":1}
+      {"id":30,"parentid":2,"obj":"fixed","w":220,"h":160,"bg_color":"#202020","bg_opa":255,"border_width":1,"border_color":"#dddddd"}
+        {"id":31,"parentid":30,"obj":"label","x":0,"w%":100,"y":4,"h":30,"align":1,"text":"T° Consigne","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":32,"parentid":30,"obj":"label","x":0,"w%":100,"y":52,"h":60,"align":1,"text":"--.-","text_color":"#dddddd","text_font":"seg7-48"}
+        {"id":33,"parentid":30,"obj":"label","x":0,"w%":100,"y":124,"h":30,"align":1,"text":"--","text_color":"#eeeeee","text_font":"montserrat-28"}
+      {"id":40,"parentid":2,"obj":"flex","w":90,"h":160,"flex_main_place":3,"flex_track_place":2,"flex_cross_place":2,"flex_flow":1}
+        {"id":41,"parentid":40,"obj":"btn","bg_color":"#3465a4","bg_opa":255,"text":"\uF067","text_color":"#eeeeee","text_font":"montserrat-28","w%":100,"radius":10,"border_width":2,"border_side":15,"border_color":"#dddddd","flex_grow":1}
+        {"id":42,"parentid":40,"obj":"btn","bg_color":"#3465a4","bg_opa":255,"text":"\uF068","text_color":"#eeeeee","text_font":"montserrat-28","w%":100,"radius":10,"border_width":2,"border_side":15,"border_color":"#dddddd","flex_grow":1}
+    {"id":5,"parentid":1,"obj":"flex","w%":100,"h":72,"flex_main_place":3,"flex_track_place":2,"flex_cross_place":2,"flex_flow":1}
+      {"id":50,"parentid":5,"obj":"flex","w%":100,"h":30,"flex_main_place":0}
+        {"id":51,"parentid":50,"obj":"label","w%":50,"align":2,"text":"T° Courante :","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":52,"parentid":50,"obj":"label","w%":16,"text":"--.-","text_color":"#dddddd","text_font":"seg7-28"}
+        {"id":53,"parentid":50,"obj":"label","w%":18,"text":"°C","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":54,"parentid":50,"obj":"label","w%":8,"align":1,"text":"-","text_color":"#dddddd","text_font":"montserrat-28"}
+      {"id":55,"parentid":5,"obj":"flex","w%":100,"h":30,"flex_main_place":0}
+        {"id":56,"parentid":55,"obj":"label","w%":50,"align":2,"text":"HR Courante :","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":57,"parentid":55,"obj":"label","w%":16,"text":"--.-","text_color":"#dddddd","text_font":"seg7-28"}
+        {"id":58,"parentid":55,"obj":"label","w%":18,"text":"%","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":59,"parentid":55,"obj":"label","w%":8,"align":1,"text":"--","text_color":"#dddddd","text_font":"seg7-20"}
+
+{"page":2,"id":0,"bg_color":"#000000","text_color":"#eeeeee"}
+{"id":10,"obj":"tabview","x":5,"w":470,"y":35,"h":380,"tab_bar_size":40,"btn_pos":1,"bg_color":"#222222","border_width":2,"border_color":"#FFFF44","val":2}
+  {"id":51,"obj":"tab","parentid":10,"text":"Tab 1","tab_bg_color":"#000000","tab_bg_color01":"#FF4400","tab_text_color":"#FFFF44","tab_text_color01":"#FFFFFF","tab_border_color":"#FFFF44","tab_border_side":1,"tab_border_width":0,"tab_border_width01":3}
+  {"id":52,"obj":"tab","parentid":10,"text":"Tab 2","tab_bg_color":"#000000","tab_bg_color01":"#FF4400","tab_text_color":"#FFFF44","tab_text_color01":"#FFFFFF","tab_border_color":"#FFFF44","tab_border_side":1,"tab_border_width":0,"tab_border_width01":3}
+  {"id":53,"obj":"tab","parentid":10,"text":"Tab 3","tab_bg_color":"#000000","tab_bg_color01":"#FF4400","tab_text_color":"#FFFF44","tab_text_color01":"#FFFFFF","tab_border_color":"#FFFF44","tab_border_side":1,"tab_border_width":0,"tab_border_width01":3}
+    {"id":61,"obj":"switch","x":20,"y":10,"w":60,"h":30,"parentid":51,"radius":25,"radius20":25,"bg_color":"#4f4f4f","bg_color20":"#FFFF88","bg_color11":"#FF4400"}
+    {"id":71,"obj":"dropdown","x":15,"y":10,"w":110,"h":30,"parentid":52,"options":"Apple\nBanana\nOrange\nMelon","bg_color50":"#FF4400","text_color":"#FFFF88","text_color50":"#FFFF88","border_color":"#FFFF88"}
+      {"id":72,"obj":"dropdown_list","parentid":71,"text_color":"#EAEAEA","bg_color51":"#FF4400"}
+    {"id":81,"obj":"checkbox","x":15,"y":10,"w":120,"h":30,"parentid":53,"text":" Nice tabview","border_color10":"#FFFF88","bg_color10":"#4F4F4F","bg_color11":"#FF4400","text_color":"#FFFF44"}
+
+{"page":3,"id":0,"bg_color":"#000000","text_color":"#eeeeee"}
+  {"id":1,"obj":"flex","x":0,"y":30,"w%":100,"h":390,"flex_main_place":3,"flex_track_place":2,"flex_flow":1}
+    {"id":2,"parentid":1,"obj":"flex","w%":100,"h":66,"flex_main_place":0,"flex_track_place":2,"flex_flow":1}
+      {"id":20,"parentid":2,"obj":"flex","w%":92,"h":30,"flex_main_place":0}
+        {"id":21,"parentid":20,"obj":"label","w%":50,"align":2,"text":"T° Eco :","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":22,"parentid":20,"obj":"label","w%":15,"align":2,"text":"--.-","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":23,"parentid":20,"obj":"label","w%":10,"align":0,"text":"°C","text_color":"#dddddd","text_font":"montserrat-28"}
+      {"id":24,"parentid":2,"obj":"slider","w%":92,"h":16,"bg_color10":"#4444FF","bg_color20":"#FF4400","val":32,"min":24,"max":44,"bg_grad_color10":"#FF4400","bg_grad_dir10":2,"border_color":"#dddddd","border_width":2,"pad_all":2,"radius":6}
+    {"id":3,"parentid":1,"obj":"flex","w%":100,"h":66,"flex_main_place":0,"flex_track_place":2,"flex_flow":1}
+      {"id":30,"parentid":3,"obj":"flex","w%":92,"h":30,"flex_main_place":0}
+        {"id":31,"parentid":30,"obj":"label","w%":50,"align":2,"text":"T° Comfort :","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":32,"parentid":30,"obj":"label","w%":15,"align":2,"text":"--.-","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":33,"parentid":30,"obj":"label","w%":10,"align":0,"text":"°C","text_color":"#dddddd","text_font":"montserrat-28"}
+      {"id":34,"parentid":3,"obj":"slider","w%":92,"h":16,"bg_color10":"#4444FF","bg_color20":"#FF4400","val":32,"min":24,"max":44,"bg_grad_color10":"#FF4400","bg_grad_dir10":2,"border_color":"#dddddd","border_width":2,"pad_all":2,"radius":6}
+    {"id":4,"parentid":1,"obj":"flex","w%":100,"h":66,"flex_main_place":0,"flex_track_place":2,"flex_flow":1}
+      {"id":40,"parentid":4,"obj":"flex","w%":92,"h":30,"flex_main_place":0}
+        {"id":41,"parentid":40,"obj":"label","w%":50,"align":2,"text":"T° Comfort+ :","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":42,"parentid":40,"obj":"label","w%":15,"align":2,"text":"--.-","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":43,"parentid":40,"obj":"label","w%":10,"align":0,"text":"°C","text_color":"#dddddd","text_font":"montserrat-28"}
+      {"id":44,"parentid":4,"obj":"slider","w%":92,"h":16,"bg_color10":"#4444FF","bg_color20":"#FF4400","val":32,"min":24,"max":44,"bg_grad_color10":"#FF4400","bg_grad_dir10":2,"border_color":"#dddddd","border_width":2,"pad_all":2,"radius":6}
+    {"id":5,"parentid":1,"obj":"flex","w%":100,"h":66,"flex_main_place":0,"flex_track_place":2,"flex_flow":1}
+      {"id":50,"parentid":5,"obj":"flex","w%":92,"h":30,"flex_main_place":0}
+        {"id":51,"parentid":50,"obj":"label","w%":50,"align":2,"text":"Luminosite :","text_color":"#dddddd","text_font":"montserrat-28"}
+        {"id":52,"parentid":50,"obj":"label","w%":10,"align":2,"text":"--","text_color":"#dddddd","text_font":"montserrat-28"}
+      {"id":54,"parentid":5,"obj":"slider","w%":92,"h":16,"bg_color10":"#4444FF","bg_color20":"#FF4400","val":5,"min":1,"max":10,"bg_grad_color10":"#FF4400","bg_grad_dir10":2,"border_color":"#dddddd","border_width":2,"pad_all":2,"radius":6}
