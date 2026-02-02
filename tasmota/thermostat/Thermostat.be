@@ -151,10 +151,9 @@ class Thermostat
     end
 
     def set_target_temp(new_temp, force)  # -> boolean
-        # print(f"update target_temp={new_temp} force={force}")
         if force || (persist.preset_until == 0)
             persist.target_temp = math.min(math.max(self.MIN_TEMP, new_temp), self.MAX_TEMP)
-            print(f"set target_temp {new_temp}=>{persist.target_temp}")
+            # print(f"set target_temp {new_temp}=>{persist.target_temp}")
             persist.save()
             return true
         end
@@ -174,7 +173,7 @@ class Thermostat
     def set_temp_eco(new_temp)  # -> boolean
         if self.valid_temp(new_temp)
             persist.temp_eco = new_temp
-            print(f"preset={persist.preset}, new_temp={new_temp}")
+            # print(f"preset={persist.preset}, new_temp={new_temp}")
             persist.save()
             return true
         end
@@ -277,10 +276,10 @@ class Thermostat
                     tasmota.log(f"Thermostat: diff_temp={diff_temp:.2f}, power off", self.LOG_LEVEL_DEBUG)
                     tasmota.set_power(self.power_index, false)
                 else
-                    if diff_temp <= 0.5
-                        power_pulse = int(math.floor(0.700 * power_pulse))
-                    elif diff_temp <= 1.0
-                        power_pulse = int(math.floor(0.850 * power_pulse))
+                    if diff_temp <= 0.6
+                        power_pulse = int(math.floor(0.650 * power_pulse))
+                    elif diff_temp <= 1.5
+                        power_pulse = int(math.floor(0.800 * power_pulse))
                     end
                     tasmota.log(f"Thermostat: diff_temp={diff_temp:.2f}, power_pulse={power_pulse}ms", self.LOG_LEVEL_DEBUG)
                     tasmota.cmd(f"TimedPower{self.power_index+1} {power_pulse+5000:i} ON")
