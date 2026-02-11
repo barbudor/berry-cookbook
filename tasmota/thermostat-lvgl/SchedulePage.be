@@ -1,11 +1,14 @@
+import BasePage
 import persist
 
-import BasePage
+# =========================================================
 
 class SchedulePage : BasePage
-    def init()
-        super(self).init(2, p2)
+    def init(page_id, device)
+        super(self).init(page_id, "schedule_page", device)
     end
 end
+
+# =========================================================
 
 return SchedulePage

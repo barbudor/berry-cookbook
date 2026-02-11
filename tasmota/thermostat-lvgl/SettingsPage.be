@@ -1,81 +1,130 @@
+import BasePage
 import math
 import persist
+import string
+import mqtt
+import json
 
-import BasePage
+# =========================================================
 
 class SettingsPage : BasePage
-    static var slider_to_label = {
-        "p3b24": p3b22,
-        "p3b34": p3b32,
-        "p3b44": p3b42,
-        "p3b54": p3b52,
-    }
-    static var slider_to_setting = {
-        "p3b24": "temp_eco",
-        "p3b34": "temp_comfort",
-        "p3b44": "temp_comfort_plus",
-        "p3b54": "backlight",
+    static var setting_to_cmnd = {
+        "temp_eco": "ThTempEco",
+        "temp_comfort": "ThTempComfort",
+        "temp_comfortplus": "ThTempComPlus",
     }
     static var backlight_min = 30
     static var backlight_max = 60
-    
-    def init()
-        super(self).init(3, p3)
-        tasmota.add_rule("hasp#p3b24#event=changed", /v,t,m -> self.slider_temp_changed(m['hasp']))
-        tasmota.add_rule("hasp#p3b34#event=changed", /v,t,m -> self.slider_temp_changed(m['hasp']))
-        tasmota.add_rule("hasp#p3b44#event=changed", /v,t,m -> self.slider_temp_changed(m['hasp']))
-        tasmota.add_rule("hasp#p3b54#event=changed", /v,t,m -> self.slider_backlight_changed(m['hasp']))
-        tasmota.add_rule("hasp#p3b24#event=released", /v,t,m -> self.slider_released(m['hasp']))
-        tasmota.add_rule("hasp#p3b34#event=released", /v,t,m -> self.slider_released(m['hasp']))
-        tasmota.add_rule("hasp#p3b44#event=released", /v,t,m -> self.slider_released(m['hasp']))
-        tasmota.add_rule("hasp#p3b54#event=released", /v,t,m -> self.slider_released(m['hasp']))
+    var remote_topic, slider_cache
+
+    def init(page_id, device)
+        super(self).init(page_id, "settings_page", device)
+        self.persist_init("backlight", 8)
+        self.update_backlight(persist.backlight)
+        self.register_event("sl_temp_eco", nil, /v,t,m -> self.slider_event(v, m['hasp'], 'temp_eco'))
+        self.register_event("sl_temp_comfort", nil, /v,t,m -> self.slider_event(v, m['hasp'], 'temp_comfort'))
+        self.register_event("sl_temp_comfortplus", nil, /v,t,m -> self.slider_event(v, m['hasp'], 'temp_comfortplus'))
+        self.register_event("sl_backlight", nil, /v,t,m -> self.slider_backlight_event(v, m['hasp']))
+        self.register_callbacks()
     end
-    
-    def slider_temp_changed(event)
-        for slider: event.keys()
-            var val = real(event[slider]['val'])/2.0
+
+    def persist_init(key, default)
+        if !persist.has(key)
+            persist.setmember(key, default)
+        end
+    end
+
+    def add_rules()
+        tasmota.add_rule("THTempEco", /v,t,m -> self.update_temp_preset("eco", v))
+        tasmota.add_rule("THTempComfort", /v,t,m -> self.update_temp_preset("comfort", v))
+        tasmota.add_rule("THTempComPlus", /v,t,m -> self.update_temp_preset("comfortplus", v))
+        tasmota.add_rule("Thermostat", /v,t,m -> self.update_thermostat(m['Thermostat']))
+    end
+
+    def subscribe_mqtt()
+        self.device.subscribe('stat', "THTempEco", /topic, idx, data, databytes -> self.update_temp_preset("eco", json.load(data).find('THTempEco')))
+        self.device.subscribe('stat', "THTempComfort", /topic, idx, data, databytes -> self.update_temp_preset("comfort", json.load(data).find('THTempComfort')))
+        self.device.subscribe('stat', "THTempComPlus", /topic, idx, data, databytes -> self.update_temp_preset("comfortplus", json.load(data).find('THTempComPlus')))
+        self.device.subscribe('stat', "THERMOSTAT", /topic, idx, data, databytes -> self.update_thermostat(json.load(data)['Thermostat']))
+    end
+
+    def slider_event(event_name, payload, setting_name)
+        # print("SettingsPage: slider event:", event_name, payload, setting_name)
+        var slider_id = self.get_widget_id(f"sl_{setting_name}")
+        if event_name == "changed"
+            var val = real(payload[slider_id]['val'])/2.0
             var val_str = f"{val:2.1f}"
-            var label = self.slider_to_label[slider]
+            self.slider_cache = val_str
+            var label = self.widget.find(f"lb_{setting_name}")
             if label
                 label.text = val_str
-                persist.setmember(self.slider_to_setting[slider], val)
+            end
+        elif event_name == "up"
+            var cmnd = self.setting_to_cmnd[setting_name]
+            if cmnd
+                self.device.send_command(cmnd, self.slider_cache)
             end
         end
     end
 
-    def slider_backlight_changed(event)
-        for slider: event.keys()
-            var val = event[slider]['val']
+    def slider_backlight_event(event_name, payload)
+        # print("SettingsPage: backlight slider event:", event_name, payload)
+        var slider_id = self.get_widget_id("sl_backlight")
+        if event_name == "changed"
+            var val = payload[slider_id]['val']
             var val_str = f"{val:2i}"
-            var label = self.slider_to_label[slider]
+            self.slider_cache = val_str
+            var label = self.widget.find("lb_backlight")
             if label
                 label.text = val_str
-                persist.setmember(self.slider_to_setting[slider], val)
                 self.set_dimmer(self.backlight_to_dimmer(val))
             end
+        elif event_name == "up"
+            persist.backlight = self.slider_cache
+            persist.save()
         end
     end
-    
-    def slider_released(event)
-        persist.save()
-    end
-    
+
     def backlight_to_dimmer(slider_val)
         var dimmer = int(math.round(self.backlight_min + (slider_val - 1) / 9.0 * (self.backlight_max - self.backlight_min)))
         return dimmer
     end
-    
-    def update()
-        p3b22.text = f"{persist.temp_eco:2.1f}"
-        p3b24.set_val(2*persist.temp_eco)
-        p3b32.text = f"{persist.temp_comfort:2.1f}"
-        p3b34.set_val(2*persist.temp_comfort)
-        p3b42.text = f"{persist.temp_comfort_plus:2.1f}"
-        p3b44.set_val(2*persist.temp_comfort_plus)
-        p3b52.text = f"{persist.backlight:2i}"
-        p3b54.set_val(persist.backlight)
-        self.set_dimmer(self.backlight_to_dimmer(persist.backlight))
+
+    def update_temp_preset(preset, value)
+        if value != nil
+            var temp = real(value)
+            self.widget[f"lb_temp_{preset}"].text = f"{temp:2.1f}"
+            self.widget[f"sl_temp_{preset}"].set_val(2*temp)
+        end
+    end
+
+    def update_backlight(value)
+        if value != nil
+            var backlight = int(value)
+            self.widget["lb_backlight"].text = f"{backlight:2i}"
+            self.widget["sl_backlight"].set_val(backlight)
+            self.set_dimmer(self.backlight_to_dimmer(backlight))
+        end
+    end
+
+    def update_thermostat(th_status)
+        # {"preset_until_iso":null,"temp_comfortplus":20,"temp_eco":12,"current_temp":16.8,"temp_comfort":18.5,"preset_until":0,"preset":"eco","target_temp":12}
+        # print('SettingsPage: Updating settings page:', th_status)
+        var value = th_status.find("temp_eco")
+        if value != nil
+            self.update_temp_preset("eco", value)
+        end
+        value = th_status.find("temp_comfort")
+        if value != nil
+            self.update_temp_preset("comfort", value)
+        end
+        value = th_status.find("temp_comfortplus")
+        if value != nil
+            self.update_temp_preset("comfortplus", value)
+        end
     end
 end
+
+# =========================================================
 
 return SettingsPage
