@@ -52,13 +52,13 @@
       {"id": 24, "meta": "sl_temp_eco", "parentid": 2, "obj": "slider", "w%": 92, "h": 16, "bg_color10": "#4444FF", "bg_color20": "#FF4400", "val": 32, "min": 16, "max": 50, "bg_grad_color10": "#FF4400", "bg_grad_dir10": 2, "border_color": "#dddddd", "border_width": 2, "pad_all": 2, "radius": 6}
     {"id": 3, "parentid": 1, "obj": "flex", "w%": 100, "h": 66, "flex_main_place": 0, "flex_track_place": 2, "flex_flow": 1}
       {"id": 30, "parentid": 3, "obj": "flex", "w%": 92, "h": 30, "flex_main_place": 0}
-        {"id": 31, "parentid": 30, "obj": "label", "w%": 50, "align": 2, "text": "T° Comfort : ", "text_color": "#dddddd", "text_font": "montserrat-28"}
+        {"id": 31, "parentid": 30, "obj": "label", "w%": 50, "align": 2, "text": "T° Confort : ", "text_color": "#dddddd", "text_font": "montserrat-28"}
         {"id": 32, "meta": "lb_temp_comfort", "parentid": 30, "obj": "label", "w%": 15, "align": 2, "text": "--.-", "text_color": "#dddddd", "text_font": "montserrat-28"}
         {"id": 33, "parentid": 30, "obj": "label", "w%": 10, "align": 0, "text": "°C", "text_color": "#dddddd", "text_font": "montserrat-28"}
       {"id": 34, "meta": "sl_temp_comfort", "parentid": 3, "obj": "slider", "w%": 92, "h": 16, "bg_color10": "#4444FF", "bg_color20": "#FF4400", "val": 32, "min": 16, "max": 50, "bg_grad_color10": "#FF4400", "bg_grad_dir10": 2, "border_color": "#dddddd", "border_width": 2, "pad_all": 2, "radius": 6}
     {"id": 4, "parentid": 1, "obj": "flex", "w%": 100, "h": 66, "flex_main_place": 0, "flex_track_place": 2, "flex_flow": 1}
       {"id": 40, "parentid": 4, "obj": "flex", "w%": 92, "h": 30, "flex_main_place": 0}
-        {"id": 41, "parentid": 40, "obj": "label", "w%": 50, "align": 2, "text": "T° Comfort+ : ", "text_color": "#dddddd", "text_font": "montserrat-28"}
+        {"id": 41, "parentid": 40, "obj": "label", "w%": 50, "align": 2, "text": "T° Confort+ : ", "text_color": "#dddddd", "text_font": "montserrat-28"}
         {"id": 42, "meta": "lb_temp_comfortplus", "parentid": 40, "obj": "label", "w%": 15, "align": 2, "text": "--.-", "text_color": "#dddddd", "text_font": "montserrat-28"}
         {"id": 43, "parentid": 40, "obj": "label", "w%": 10, "align": 0, "text": "°C", "text_color": "#dddddd", "text_font": "montserrat-28"}
       {"id": 44, "meta": "sl_temp_comfortplus", "parentid": 4, "obj": "slider", "w%": 92, "h": 16, "bg_color10": "#4444FF", "bg_color20": "#FF4400", "val": 32, "min": 16, "max": 50, "bg_grad_color10": "#FF4400", "bg_grad_dir10": 2, "border_color": "#dddddd", "border_width": 2, "pad_all": 2, "radius": 6}
