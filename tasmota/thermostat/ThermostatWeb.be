@@ -6,10 +6,18 @@ import webserver
 class ThermostatWeb
 
     var th
+    var last_target_temp
 
     def init(thermostat_instance)
         self.th = thermostat_instance
+        self.last_target_temp = nil
     end
+
+    def slider_update(id, value)
+        # This trick allows DOM updates, while <script> tags would be blocked for security reasons
+        return f"<img src='data:x,' style='display:none' onerror=\"let obj=eb('{id}');if (obj) obj.{value=};this.remove();\">"
+    end
+
 
     def web_add_main_button()
         var th_status = self.th.get_status()
@@ -68,6 +76,11 @@ class ThermostatWeb
                   f"{{s}}Température confort{{m}}{th_status['temp_comfort']:.1f} °C{{e}}"..
                   f"{{s}}Température confort +{{m}}{th_status['temp_comfortplus']:.1f} °C{{e}}"
         tasmota.web_send_decimal(msg)
+        if th_status['target_temp'] != self.last_target_temp
+            self.last_target_temp = th_status['target_temp']
+            tasmota.web_send(self.slider_update('sltargettemp', self.last_target_temp))
+        end
+
     end
 
 end
