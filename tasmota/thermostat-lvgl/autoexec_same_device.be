@@ -1,3 +1,4 @@
+tasmota.set_power(1,true) # insure display is on early (pb when using so0 0)
 import mqtt
 import json
 
@@ -18,14 +19,14 @@ haspmota.start()
 import Device
 import OverlayPage
 import MainPage
-#import SchedulePage
+import SchedulePage
 import SettingsPage
 
 var device_name = tasmota.cmd("DeviceName")['DeviceName']
 var device = Device(device_name)
 var overlay_page = OverlayPage(0, device)
 var main_page = MainPage(1, device)
-#var schedule_page = SchedulePage(2, device)
+var schedule_page = SchedulePage(2, device)
 var settings_page = SettingsPage(3, device)
 overlay_page.show_page("main_page")
 

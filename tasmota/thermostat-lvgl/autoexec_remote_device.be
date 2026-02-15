@@ -1,3 +1,4 @@
+tasmota.set_power(0,true) # insure display is on early (pb when using so0 0)
 import haspmota
 haspmota.start()
 
